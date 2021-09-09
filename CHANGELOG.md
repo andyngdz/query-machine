@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/andyngdz/query-machine/compare/v1.0.0...v1.0.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* fixed release config ([81a73fa](https://github.com/andyngdz/query-machine/commit/81a73fac907de4ea09798ad286ebff2ced1d3c6b))
+
 # 1.0.0 (2021-09-09)
 
 
