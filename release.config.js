@@ -3,8 +3,8 @@ module.exports = {
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
     '@semantic-release/changelog',
-    '@semantic-release/github',
     '@semantic-release/npm',
+    '@semantic-release/github',
     '@semantic-release/git'
   ],
   branches: ['main'],
@@ -12,7 +12,14 @@ module.exports = {
     '@semantic-release/changelog',
     {
       path: '@semantic-release/git',
-      assets: ['package.json', 'package-lock.json', 'CHANGELOG.md'],
+      assets: [
+        'build/**',
+        'package.json',
+        'package-lock.json',
+        'CHANGELOG.md',
+        'README.md',
+        'LICENSE'
+      ],
       message:
         'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
     }
