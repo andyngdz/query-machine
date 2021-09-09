@@ -2,10 +2,10 @@ module.exports = {
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
-    '@semantic-release/npm',
-    '@semantic-release/git',
     '@semantic-release/changelog',
-    '@semantic-release/github'
+    '@semantic-release/github',
+    '@semantic-release/npm',
+    '@semantic-release/git'
   ],
   branches: ['main'],
   prepare: [
