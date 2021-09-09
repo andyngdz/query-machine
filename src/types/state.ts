@@ -1,1 +1,1 @@
-export type TState = 'idle' | 'request'
+export type TStateValues = 'idle' | 'request' | 'success' | 'failure'

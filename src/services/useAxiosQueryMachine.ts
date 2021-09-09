@@ -1,5 +1,6 @@
-import { useQueryMachine, IUseQueryMachine } from '../hooks'
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { useQueryMachine } from '../hooks'
+import { IUseQueryMachine } from '../types'
 
 export const useAxiosQueryMachine = <T>(
   config?: AxiosRequestConfig

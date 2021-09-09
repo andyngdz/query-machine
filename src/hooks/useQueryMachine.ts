@@ -1,24 +1,27 @@
 import { useMachine } from '@xstate/react'
-import { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { State } from 'xstate'
-import { IRequestMachineContext, requestMachine } from '../states'
-import { TRequest } from '../types'
-
-export interface IUseQueryMachine<T> {
-  state: State<IRequestMachineContext<T>>
-
-  onGet: TRequest
-}
+import { AxiosInstance } from 'axios'
+import { createRequests } from '../services'
+import { requestMachine } from '../states'
+import { IUseQueryMachine } from '../types'
 
 export const useQueryMachine = <T>(
-  axiosBase: AxiosInstance
+  axios: AxiosInstance
 ): IUseQueryMachine<T> => {
   const [state, send] = useMachine(requestMachine<T>())
+  const requests = createRequests(axios, send)
 
-  const onGet = (url: string, config?: AxiosRequestConfig) => {
-    const request = () => axiosBase.get<T>(url, config)
-    send('REQUEST', { request })
+  const isFailure = state.matches('failure')
+  const isIdle = state.matches('idle')
+  const isRequest = state.matches('request')
+  const isSuccess = state.matches('success')
+
+  return {
+    ...requests,
+    isIdle,
+    isRequest,
+    isSuccess,
+    isFailure,
+    send,
+    state
   }
-
-  return { state, onGet }
 }
