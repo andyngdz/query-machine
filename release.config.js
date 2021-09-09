@@ -15,7 +15,7 @@ module.exports = {
       assets: [
         'build/**',
         'package.json',
-        'package-lock.json',
+        'yarn.lock',
         'CHANGELOG.md',
         'README.md',
         'LICENSE'
