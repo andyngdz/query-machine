@@ -18,7 +18,7 @@ module.exports = {
     },
     {
       path: '@semantic-release/npm',
-      tarballDir: 'build'
+      pkgRoot: 'build'
     }
   ],
   verifyConditions: [
