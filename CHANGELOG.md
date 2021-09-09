@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/andyngdz/query-machine/compare/v1.0.2...v1.0.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* updated package version ([e0c23d9](https://github.com/andyngdz/query-machine/commit/e0c23d92ef05cab5e1cbea6338fd2e77ceb46a8e))
+
 ## [1.0.2](https://github.com/andyngdz/query-machine/compare/v1.0.1...v1.0.2) (2021-09-09)
 
 
