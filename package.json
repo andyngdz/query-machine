@@ -15,11 +15,15 @@
     "url": "git+https://github.com/andyngdz/query-machine.git"
   },
   "keywords": [
-    "query",
-    "xstate",
-    "axios",
+    "react",
     "api",
-    "ajax"
+    "query",
+    "rest-api",
+    "machine",
+    "ajax",
+    "axios",
+    "xstate",
+    "query-machine"
   ],
   "author": "Andy D. Ng",
   "license": "ISC",
