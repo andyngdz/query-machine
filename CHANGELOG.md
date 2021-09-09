@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/andyngdz/query-machine/compare/v1.0.1...v1.0.2) (2021-09-09)
+
+
+### Bug Fixes
+
+* fixed npm package wrong assets 1 ([8f3995e](https://github.com/andyngdz/query-machine/commit/8f3995e17a52a02a18c71ee9867ae80e9e6a76f3))
+
 ### Bug Fixes
 
 - fixed npm package wrong assets 1 ([8f3995e](https://github.com/andyngdz/query-machine/commit/8f3995e17a52a02a18c71ee9867ae80e9e6a76f3))
