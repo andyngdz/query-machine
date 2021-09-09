@@ -26,7 +26,7 @@
     "query-machine"
   ],
   "author": "Andy D. Ng",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/andyngdz/query-machine/issues"
   },

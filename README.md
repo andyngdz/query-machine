@@ -30,7 +30,6 @@ onGet('/breeds/image/random')
 // Check state, context
 state.context
 state.context.data <- Your data here
-
 ```
 
 ## License
