@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/andyngdz/query-machine/compare/v1.1.0...v1.2.0) (2021-09-10)
+
+
+### Features
+
+* supported multi requests ([e592d6c](https://github.com/andyngdz/query-machine/commit/e592d6c7b51c40bc34c1be639091d8b593af3373))
+
 # [1.1.0](https://github.com/andyngdz/query-machine/compare/v1.0.5...v1.1.0) (2021-09-10)
 
 
