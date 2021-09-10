@@ -25,17 +25,17 @@ export const createRequests = <T>(
     send('REQUEST', { request })
   }
 
-  const onPatch = <P>(url: string, data: P, config?: AxiosRequestConfig) => {
+  const onPatch = <D>(url: string, data: D, config?: AxiosRequestConfig) => {
     const request = () => axios.patch<T>(url, data, config)
     send('REQUEST', { request })
   }
 
-  const onPost = <P>(url: string, data: P, config?: AxiosRequestConfig) => {
+  const onPost = <D>(url: string, data: D, config?: AxiosRequestConfig) => {
     const request = () => axios.post<T>(url, data, config)
     send('REQUEST', { request })
   }
 
-  const onPut = <P>(url: string, data: P, config?: AxiosRequestConfig) => {
+  const onPut = <D>(url: string, data: D, config?: AxiosRequestConfig) => {
     const request = () => axios.put<T>(url, data, config)
     send('REQUEST', { request })
   }

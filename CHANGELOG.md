@@ -1,66 +1,44 @@
-## [1.2.2](https://github.com/andyngdz/query-machine/compare/v1.2.1...v1.2.2) (2021-09-10)
-
-
-### Bug Fixes
-
-* updated readme for highlight code ([10ac78c](https://github.com/andyngdz/query-machine/commit/10ac78c28aeaaf624f8b3a228c4879439753cee0))
-* updated readme for using useQueryMachine ([84832e5](https://github.com/andyngdz/query-machine/commit/84832e5274efe9565839b6011c95ce5120c695b9))
-
-## [1.2.2](https://github.com/andyngdz/query-machine/compare/v1.2.1...v1.2.2) (2021-09-10)
-
-
-### Bug Fixes
-
-* updated readme for highlight code ([10ac78c](https://github.com/andyngdz/query-machine/commit/10ac78c28aeaaf624f8b3a228c4879439753cee0))
-
 ## [1.2.1](https://github.com/andyngdz/query-machine/compare/v1.2.0...v1.2.1) (2021-09-10)
 
-
 ### Bug Fixes
 
-* updated readme and removed .DS_Store ([f940176](https://github.com/andyngdz/query-machine/commit/f94017671773ef7f88c9d4a6ecac220b19b672b8))
+- updated readme and removed .DS_Store ([f940176](https://github.com/andyngdz/query-machine/commit/f94017671773ef7f88c9d4a6ecac220b19b672b8))
 
 # [1.2.0](https://github.com/andyngdz/query-machine/compare/v1.1.0...v1.2.0) (2021-09-10)
 
-
 ### Features
 
-* supported multi requests ([e592d6c](https://github.com/andyngdz/query-machine/commit/e592d6c7b51c40bc34c1be639091d8b593af3373))
+- supported multi requests ([e592d6c](https://github.com/andyngdz/query-machine/commit/e592d6c7b51c40bc34c1be639091d8b593af3373))
 
 # [1.1.0](https://github.com/andyngdz/query-machine/compare/v1.0.5...v1.1.0) (2021-09-10)
 
-
 ### Features
 
-* updated README.md ([4ea7b50](https://github.com/andyngdz/query-machine/commit/4ea7b5038d10beb6a92c2930972ca5c52e4fda36))
+- updated README.md ([4ea7b50](https://github.com/andyngdz/query-machine/commit/4ea7b5038d10beb6a92c2930972ca5c52e4fda36))
 
 ## [1.0.5](https://github.com/andyngdz/query-machine/compare/v1.0.4...v1.0.5) (2021-09-09)
 
-
 ### Bug Fixes
 
-* added files to package ([a05ce43](https://github.com/andyngdz/query-machine/commit/a05ce436b3dfc572c14e575dad7985c67080e66f))
+- added files to package ([a05ce43](https://github.com/andyngdz/query-machine/commit/a05ce436b3dfc572c14e575dad7985c67080e66f))
 
 ## [1.0.4](https://github.com/andyngdz/query-machine/compare/v1.0.3...v1.0.4) (2021-09-09)
 
-
 ### Bug Fixes
 
-* fixed package version and build assets ([516b3c7](https://github.com/andyngdz/query-machine/commit/516b3c77c3e662e90e6e08a9531286389bd4280f))
+- fixed package version and build assets ([516b3c7](https://github.com/andyngdz/query-machine/commit/516b3c77c3e662e90e6e08a9531286389bd4280f))
 
 ## [1.0.3](https://github.com/andyngdz/query-machine/compare/v1.0.2...v1.0.3) (2021-09-09)
 
-
 ### Bug Fixes
 
-* updated package version ([e0c23d9](https://github.com/andyngdz/query-machine/commit/e0c23d92ef05cab5e1cbea6338fd2e77ceb46a8e))
+- updated package version ([e0c23d9](https://github.com/andyngdz/query-machine/commit/e0c23d92ef05cab5e1cbea6338fd2e77ceb46a8e))
 
 ## [1.0.2](https://github.com/andyngdz/query-machine/compare/v1.0.1...v1.0.2) (2021-09-09)
 
-
 ### Bug Fixes
 
-* fixed npm package wrong assets 1 ([8f3995e](https://github.com/andyngdz/query-machine/commit/8f3995e17a52a02a18c71ee9867ae80e9e6a76f3))
+- fixed npm package wrong assets 1 ([8f3995e](https://github.com/andyngdz/query-machine/commit/8f3995e17a52a02a18c71ee9867ae80e9e6a76f3))
 
 ### Bug Fixes
 

@@ -1,13 +1,11 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { AxiosRequestConfig } from 'axios'
 
-export type TRequest<T> = () => Promise<AxiosResponse<T>>
+export type TRequest<R> = () => Promise<R>
 
 export type TNormalRequest = (url: string, config?: AxiosRequestConfig) => void
 
-export type TDataRequest = <P>(
+export type TDataRequest = <D>(
   url: string,
-  data: P,
+  data: D,
   config?: AxiosRequestConfig
 ) => void
-
-export type TRequestResponse<T> = Promise<AxiosResponse<T> | AxiosResponse<T>[]>
