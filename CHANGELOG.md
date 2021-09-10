@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/andyngdz/query-machine/compare/v1.0.5...v1.1.0) (2021-09-10)
+
+
+### Features
+
+* updated README.md ([4ea7b50](https://github.com/andyngdz/query-machine/commit/4ea7b5038d10beb6a92c2930972ca5c52e4fda36))
+
 ## [1.0.5](https://github.com/andyngdz/query-machine/compare/v1.0.4...v1.0.5) (2021-09-09)
 
 
