@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/andyngdz/query-machine/compare/v1.2.0...v1.2.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* updated readme and removed .DS_Store ([f940176](https://github.com/andyngdz/query-machine/commit/f94017671773ef7f88c9d4a6ecac220b19b672b8))
+
 # [1.2.0](https://github.com/andyngdz/query-machine/compare/v1.1.0...v1.2.0) (2021-09-10)
 
 
