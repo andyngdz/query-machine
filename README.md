@@ -8,6 +8,7 @@
 </p>
 
 [![npm version](https://badge.fury.io/js/query-machine.svg)](https://badge.fury.io/js/query-machine)
+
 query-machine is a combination of [XState](https://xstate.js.org/) and [Axios](https://axios-http.com/)
 
 ### Features
@@ -38,11 +39,11 @@ yarn install query-machine
 
 ### Quick start
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{state, onGet }] = useAxiosQueryMachine<IDogResponse>({
+const [{ state, onGet }] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
 
@@ -62,16 +63,17 @@ state.context.data <- Your data here
 
 #### Checking states
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{state, onGet }] = useAxiosQueryMachine<IDogResponse>({
+const [{ state, onGet }] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
 
 // Request to get a random image
 onGet('/breeds/image/random')
+
 
 // isFailure?
 state.matches('failure')
@@ -85,47 +87,44 @@ state.matches('success')
 
 ##### Or you can check directly
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{
-	state,
-	onGet,
-	isFailure,
-	isIdle,
-	isRequest,
-	isSuccess
-}] = useAxiosQueryMachine<IDogResponse>({
-  baseURL: 'https://dog.ceo/api'
-})
+const [{ state, onGet, isFailure, isIdle, isRequest, isSuccess }] =
+  useAxiosQueryMachine<IDogResponse>({
+    baseURL: 'https://dog.ceo/api'
+  })
 ```
 
 #### Where are errors?
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{state, onGet, isFailure }] = useAxiosQueryMachine<IDogResponse>({
+const [{ state, onGet, isFailure }] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
 
 // Request to get a random image, but the dog runs away?
 onGet('/breeds/image/random')
 
-// Check errors here
-state.matches('failure') or isFailure
+// Check status here
+state.matches('failure') <- First way to check failure
+isFailure <- Second way to check failure
+
+// Get errors here
 state.context.error <- AxiosError
 ```
 
 #### Interceptors
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{state, onGet, onPost,.... }, apiBase] = useAxiosQueryMachine<IDogResponse>({
+const [{ state, onGet, onPost,.... }, apiBase] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
 
@@ -158,50 +157,52 @@ apiBase.interceptors.response.use(
 
 #### Custom request?
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{ state,  send },  apiBase] =  useAxiosQueryMachine({
-	baseURL:  'https://dog.ceo/api'
+const [{ state, send }, apiBase] = useAxiosQueryMachine({
+  baseURL: 'https://dog.ceo/api'
 })
 
 // Send custom request
 send('REQUEST', {
-	request: () => {
+  request: () => {
     // Do something here?
-    const  randomDogImage1  =  apiBase.get('/breeds/image/random')
+    const randomDogImage1 = apiBase.get('/breeds/image/random')
     // May do something here again?
 
-    return  randomDogImage1
-	}
+    return randomDogImage1
+  }
 })
 
 // Your data will be here
 state.context.data
 ```
 
-```
+##### Multi requests
+
+```javascript
 // Your need to install axios
 import axios from 'axios'
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
 const [{ state, send }, apiBase] = useAxiosQueryMachine({
-	baseURL: 'https://dog.ceo/api'
+  baseURL: 'https://dog.ceo/api'
 })
 
 // Send custom request
 send('REQUEST', {
-	request: () => {
-		// Do something here?
-		const randomDogImage1 = apiBase.get('/breeds/image/random')
-		const randomDogImage2 = apiBase.get('/breeds/image/random')
-		const randomDogImage3 = apiBase.get('/breeds/image/random')
-		// May do something here again?
+  request: () => {
+    // Do something here?
+    const randomDogImage1 = apiBase.get('/breeds/image/random')
+    const randomDogImage2 = apiBase.get('/breeds/image/random')
+    const randomDogImage3 = apiBase.get('/breeds/image/random')
+    // May do something here again?
 
-		return axios.all([randomDogImage1, randomDogImage2, randomDogImage3])
-	}
+    return axios.all([randomDogImage1, randomDogImage2, randomDogImage3])
+  }
 })
 
 // Data will be an array here
@@ -210,126 +211,114 @@ state.context.data
 
 ### Additional information
 
-```
+```javascript
 // AxiosError
 
-export  interface  AxiosError<T  =  any> extends  Error {
-	config:  AxiosRequestConfig;
-	code?:  string;
-	request?:  any;
-	response?:  AxiosResponse<T>;
-	isAxiosError:  boolean;
-	toJSON: () =>  object;
+export interface AxiosError<T = any> extends Error {
+  config: AxiosRequestConfig;
+  code?: string;
+  request?: any;
+  response?: AxiosResponse<T>;
+  isAxiosError: boolean;
+  toJSON: () => object;
 }
 ```
 
-```
-AxiosResponse
+```json
+// AxiosResponse
 
 {
   "url": "/breeds/image/random",
   "method": "get",
   "headers": {
-      "Accept": "application/json, text/plain, */*"
+    "Accept": "application/json, text/plain, */*"
   },
   "baseURL": "https://dog.ceo/api",
-  "transformRequest": [
-      null
-  ],
-  "transformResponse": [
-      null
-  ],
+  "transformRequest": [null],
+  "transformResponse": [null],
   "timeout": 0,
   "xsrfCookieName": "XSRF-TOKEN",
   "xsrfHeaderName": "X-XSRF-TOKEN",
   "maxContentLength": -1,
   "maxBodyLength": -1,
   "transitional": {
-      "silentJSONParsing": true,
-      "forcedJSONParsing": true,
-      "clarifyTimeoutError": false
+    "silentJSONParsing": true,
+    "forcedJSONParsing": true,
+    "clarifyTimeoutError": false
   }
 }
 ```
 
-```
-AxiosResponse[]
+```json
+// AxiosResponse[]
 
 [
-    {
-      "data": {
-        "message": "https://images.dog.ceo/breeds/pitbull/20190801_154956.jpg",
-        "status": "success"
-      },
-      "status": 200,
-      "statusText": "",
-      "headers": {
-        "cache-control": "no-cache, private",
-        "content-type": "application/json"
-      },
-      "config": {
-        "url": "/breeds/image/random",
-        "method": "get",
-        "headers": {
-            "Accept": "application/json, text/plain, */*"
-        },
-        "baseURL": "https://dog.ceo/api",
-        "transformRequest": [
-            null
-        ],
-        "transformResponse": [
-            null
-        ],
-        "timeout": 0,
-        "xsrfCookieName": "XSRF-TOKEN",
-        "xsrfHeaderName": "X-XSRF-TOKEN",
-        "maxContentLength": -1,
-        "maxBodyLength": -1,
-        "transitional": {
-          "silentJSONParsing": true,
-          "forcedJSONParsing": true,
-          "clarifyTimeoutError": false
-        }
-      },
-      "request": {}
+  {
+    "data": {
+      "message": "https://images.dog.ceo/breeds/pitbull/20190801_154956.jpg",
+      "status": "success"
     },
-    {
-        "data": {
-            "message": "https://images.dog.ceo/breeds/retriever-golden/Z6A_4500_200808.jpg",
-            "status": "success"
-        },
-        "status": 200,
-        "statusText": "",
-        "headers": {
-            "cache-control": "no-cache, private",
-            "content-type": "application/json"
-        },
-        "config": {
-            "url": "/breeds/image/random",
-            "method": "get",
-            "headers": {
-                "Accept": "application/json, text/plain, */*"
-            },
-            "baseURL": "https://dog.ceo/api",
-            "transformRequest": [
-                null
-            ],
-            "transformResponse": [
-                null
-            ],
-            "timeout": 0,
-            "xsrfCookieName": "XSRF-TOKEN",
-            "xsrfHeaderName": "X-XSRF-TOKEN",
-            "maxContentLength": -1,
-            "maxBodyLength": -1,
-            "transitional": {
-                "silentJSONParsing": true,
-                "forcedJSONParsing": true,
-                "clarifyTimeoutError": false
-            }
-        },
-        "request": {}
-    }
+    "status": 200,
+    "statusText": "",
+    "headers": {
+      "cache-control": "no-cache, private",
+      "content-type": "application/json"
+    },
+    "config": {
+      "url": "/breeds/image/random",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "baseURL": "https://dog.ceo/api",
+      "transformRequest": [null],
+      "transformResponse": [null],
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "maxBodyLength": -1,
+      "transitional": {
+        "silentJSONParsing": true,
+        "forcedJSONParsing": true,
+        "clarifyTimeoutError": false
+      }
+    },
+    "request": {}
+  },
+  {
+    "data": {
+      "message": "https://images.dog.ceo/breeds/retriever-golden/Z6A_4500_200808.jpg",
+      "status": "success"
+    },
+    "status": 200,
+    "statusText": "",
+    "headers": {
+      "cache-control": "no-cache, private",
+      "content-type": "application/json"
+    },
+    "config": {
+      "url": "/breeds/image/random",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "baseURL": "https://dog.ceo/api",
+      "transformRequest": [null],
+      "transformResponse": [null],
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "maxBodyLength": -1,
+      "transitional": {
+        "silentJSONParsing": true,
+        "forcedJSONParsing": true,
+        "clarifyTimeoutError": false
+      }
+    },
+    "request": {}
+  }
 ]
 ```
 
