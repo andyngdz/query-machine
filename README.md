@@ -1,20 +1,42 @@
-# Query Machine
+<p align="center">
+  <br />
+  <img src="https://raw.githubusercontent.com/andyngdz/query-machine/main/logo.png" alt="XState" width="96"/>
+  <br />
+    <sub><strong>A combination of XState and Axios</strong></sub>
+  <br />
+  <br />
+</p>
 
-## A combination of XState and Axios
+[![npm version](https://badge.fury.io/js/query-machine.svg)](https://badge.fury.io/js/query-machine)
+query-machine is a combination of [XState](https://xstate.js.org/) and [Axios](https://axios-http.com/)
 
 ### Features
 
-- Provides both xstate/axios by core
+- Provides both XState/Axios by core
+- Returns AxiosInstance and State Machines
+- Reactive, easy to manage states
 
-## Installation
+### Installation
+
+Using npm:
 
 ```
 npm install query-machine
 ```
 
+Using bower:
+
+```
+bower install query-machine
+```
+
+Using yarn:
+
 ```
 yarn install query-machine
 ```
+
+### Quick start
 
 ```
 import { useAxiosQueryMachine } from 'query-machine'
@@ -28,10 +50,115 @@ const [{state, onGet }] = useAxiosQueryMachine<IDogResponse>({
 onGet('/breeds/image/random')
 
 // Check state, context
+// isRequest?
+state.matches('request')
+// Context
 state.context
+// Data
 state.context.data <- Your data here
 ```
 
-## License
+### Example
+
+#### Checking states
+
+```
+import { useAxiosQueryMachine } from 'query-machine'
+
+// Create a new instance
+const [{state, onGet }] = useAxiosQueryMachine<IDogResponse>({
+    baseURL: 'https://dog.ceo/api'
+})
+
+// Request to get a random image
+onGet('/breeds/image/random')
+
+// isFailure?
+state.matches('failure')
+// isIdle?
+state.matches('idle')
+// isRequest?
+state.matches('request')
+// isSuccess?
+state.matches('success')
+```
+
+##### Or you can check directly
+
+```
+import { useAxiosQueryMachine } from 'query-machine'
+
+// Create a new instance
+const [{
+	state,
+	onGet,
+	isFailure,
+	isIdle,
+	isRequest,
+	isSuccess
+}] = useAxiosQueryMachine<IDogResponse>({
+    baseURL: 'https://dog.ceo/api'
+})
+```
+
+#### Where are errors?
+
+```
+import { useAxiosQueryMachine } from 'query-machine'
+
+// Create a new instance
+const [{state, onGet, isFailure }] = useAxiosQueryMachine<IDogResponse>({
+    baseURL: 'https://dog.ceo/api'
+})
+
+// Request to get a random image, but the dog runs away?
+onGet('/breeds/image/random')
+
+// Check errors here
+state.matches('failure') or isFailure
+state.context.error <- AxiosError
+```
+
+#### Custom request?
+
+```
+import { useAxiosQueryMachine } from 'query-machine'
+
+// Create a new instance
+const [{ state,  send },  apiBase] =  useAxiosQueryMachine({
+	baseURL:  'https://dog.ceo/api'
+})
+
+// Send custom request
+send('REQUEST', {
+	request: () => {
+		// Do something here?
+		const  randomDogImage1  =  apiBase.get('/breeds/image/random')
+		// May do something here again?
+		return  randomDogImage1
+	}
+})
+```
+
+### Additional information
+
+```
+// AxiosError
+
+export  interface  AxiosError<T  =  any> extends  Error {
+	config:  AxiosRequestConfig;
+	code?:  string;
+	request?:  any;
+	response?:  AxiosResponse<T>;
+	isAxiosError:  boolean;
+	toJSON: () =>  object;
+}
+```
+
+### Credits
+
+A special thanks to [XState](https://xstate.js.org/) and [Axios](https://axios-http.com/)
+
+### License
 
 MIT
