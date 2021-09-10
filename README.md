@@ -43,7 +43,7 @@ import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
 const [{state, onGet }] = useAxiosQueryMachine<IDogResponse>({
-    baseURL: 'https://dog.ceo/api'
+  baseURL: 'https://dog.ceo/api'
 })
 
 // Request to get a random image
@@ -67,7 +67,7 @@ import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
 const [{state, onGet }] = useAxiosQueryMachine<IDogResponse>({
-    baseURL: 'https://dog.ceo/api'
+  baseURL: 'https://dog.ceo/api'
 })
 
 // Request to get a random image
@@ -97,7 +97,7 @@ const [{
 	isRequest,
 	isSuccess
 }] = useAxiosQueryMachine<IDogResponse>({
-    baseURL: 'https://dog.ceo/api'
+  baseURL: 'https://dog.ceo/api'
 })
 ```
 
@@ -108,7 +108,7 @@ import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
 const [{state, onGet, isFailure }] = useAxiosQueryMachine<IDogResponse>({
-    baseURL: 'https://dog.ceo/api'
+  baseURL: 'https://dog.ceo/api'
 })
 
 // Request to get a random image, but the dog runs away?
@@ -117,6 +117,43 @@ onGet('/breeds/image/random')
 // Check errors here
 state.matches('failure') or isFailure
 state.context.error <- AxiosError
+```
+
+#### Interceptors
+
+```
+import { useAxiosQueryMachine } from 'query-machine'
+
+// Create a new instance
+const [{state, onGet, onPost,.... }, apiBase] = useAxiosQueryMachine<IDogResponse>({
+  baseURL: 'https://dog.ceo/api'
+})
+
+// Add a request interceptor
+apiBase.interceptors.request.use(
+  config => {
+    // Do something before request is sent
+    return config
+  },
+  error => {
+    // Do something with request error
+    return Promise.reject(error)
+  }
+)
+
+// Add a response interceptor
+apiBase.interceptors.response.use(
+  response => {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response
+  },
+  error => {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error)
+  }
+)
 ```
 
 #### Custom request?
@@ -132,11 +169,11 @@ const [{ state,  send },  apiBase] =  useAxiosQueryMachine({
 // Send custom request
 send('REQUEST', {
 	request: () => {
-		// Do something here?
-		const  randomDogImage1  =  apiBase.get('/breeds/image/random')
-		// May do something here again?
+    // Do something here?
+    const  randomDogImage1  =  apiBase.get('/breeds/image/random')
+    // May do something here again?
 
-		return  randomDogImage1
+    return  randomDogImage1
 	}
 })
 
@@ -190,28 +227,28 @@ export  interface  AxiosError<T  =  any> extends  Error {
 AxiosResponse
 
 {
-    "url": "/breeds/image/random",
-    "method": "get",
-    "headers": {
-        "Accept": "application/json, text/plain, */*"
-    },
-    "baseURL": "https://dog.ceo/api",
-    "transformRequest": [
-        null
-    ],
-    "transformResponse": [
-        null
-    ],
-    "timeout": 0,
-    "xsrfCookieName": "XSRF-TOKEN",
-    "xsrfHeaderName": "X-XSRF-TOKEN",
-    "maxContentLength": -1,
-    "maxBodyLength": -1,
-    "transitional": {
-        "silentJSONParsing": true,
-        "forcedJSONParsing": true,
-        "clarifyTimeoutError": false
-    }
+  "url": "/breeds/image/random",
+  "method": "get",
+  "headers": {
+      "Accept": "application/json, text/plain, */*"
+  },
+  "baseURL": "https://dog.ceo/api",
+  "transformRequest": [
+      null
+  ],
+  "transformResponse": [
+      null
+  ],
+  "timeout": 0,
+  "xsrfCookieName": "XSRF-TOKEN",
+  "xsrfHeaderName": "X-XSRF-TOKEN",
+  "maxContentLength": -1,
+  "maxBodyLength": -1,
+  "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+  }
 }
 ```
 
@@ -220,41 +257,41 @@ AxiosResponse[]
 
 [
     {
-        "data": {
-            "message": "https://images.dog.ceo/breeds/pitbull/20190801_154956.jpg",
-            "status": "success"
-        },
-        "status": 200,
-        "statusText": "",
+      "data": {
+        "message": "https://images.dog.ceo/breeds/pitbull/20190801_154956.jpg",
+        "status": "success"
+      },
+      "status": 200,
+      "statusText": "",
+      "headers": {
+        "cache-control": "no-cache, private",
+        "content-type": "application/json"
+      },
+      "config": {
+        "url": "/breeds/image/random",
+        "method": "get",
         "headers": {
-            "cache-control": "no-cache, private",
-            "content-type": "application/json"
+            "Accept": "application/json, text/plain, */*"
         },
-        "config": {
-            "url": "/breeds/image/random",
-            "method": "get",
-            "headers": {
-                "Accept": "application/json, text/plain, */*"
-            },
-            "baseURL": "https://dog.ceo/api",
-            "transformRequest": [
-                null
-            ],
-            "transformResponse": [
-                null
-            ],
-            "timeout": 0,
-            "xsrfCookieName": "XSRF-TOKEN",
-            "xsrfHeaderName": "X-XSRF-TOKEN",
-            "maxContentLength": -1,
-            "maxBodyLength": -1,
-            "transitional": {
-                "silentJSONParsing": true,
-                "forcedJSONParsing": true,
-                "clarifyTimeoutError": false
-            }
-        },
-        "request": {}
+        "baseURL": "https://dog.ceo/api",
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "transitional": {
+          "silentJSONParsing": true,
+          "forcedJSONParsing": true,
+          "clarifyTimeoutError": false
+        }
+      },
+      "request": {}
     },
     {
         "data": {
