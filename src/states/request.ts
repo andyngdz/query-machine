@@ -2,19 +2,18 @@ import { assign, createMachine, DoneInvokeEvent } from 'xstate'
 import {
   IRequestMachineContext,
   TRequestMachineEvent,
-  TRequestMachineState,
-  TRequestResponse
+  TRequestMachineState
 } from '../types'
 
 const REQUEST_MACHINE_ACTIONS = {
   REQUEST: 'request'
 }
 
-export const requestMachine = <T>() =>
+export const requestMachine = <R>() =>
   createMachine<
-    IRequestMachineContext<T>,
-    TRequestMachineEvent<T>,
-    TRequestMachineState<T>
+    IRequestMachineContext<R>,
+    TRequestMachineEvent<R>,
+    TRequestMachineState<R>
   >({
     initial: 'idle',
 
@@ -31,12 +30,10 @@ export const requestMachine = <T>() =>
           },
 
           onDone: {
-            actions: assign(
-              (_, event: DoneInvokeEvent<TRequestResponse<T>>) => {
-                const { data } = event
-                return { data }
-              }
-            ),
+            actions: assign((_, event: DoneInvokeEvent<R>) => {
+              const { data } = event
+              return { data }
+            }),
             target: 'success'
           },
 

@@ -1,13 +1,13 @@
 import { useMachine } from '@xstate/react'
-import { AxiosInstance } from 'axios'
+import { AxiosInstance, AxiosResponse } from 'axios'
 import { createRequests } from '../services'
 import { requestMachine } from '../states'
 import { IUseQueryMachine } from '../types'
 
-export const useQueryMachine = <T>(
+export const useQueryMachine = <T, R = AxiosResponse<T>>(
   axios: AxiosInstance
-): IUseQueryMachine<T> => {
-  const [state, send] = useMachine(requestMachine<T>())
+): IUseQueryMachine<R> => {
+  const [state, send] = useMachine(requestMachine<R>())
   const requests = createRequests(axios, send)
 
   const isFailure = state.matches('failure')

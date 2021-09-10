@@ -1,10 +1,10 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { useQueryMachine } from '../hooks'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { IUseQueryMachine } from '../types'
+import { useQueryMachine } from './useQueryMachine'
 
 export const useAxiosQueryMachine = <T>(
   config?: AxiosRequestConfig
-): [IUseQueryMachine<T>, AxiosInstance] => {
+): [IUseQueryMachine<AxiosResponse<T>>, AxiosInstance] => {
   const baseAxios = axios.create(config)
   const queryMachine = useQueryMachine<T>(baseAxios)
 

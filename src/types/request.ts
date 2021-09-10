@@ -1,28 +1,23 @@
 import { AxiosError } from 'axios'
-import {
-  TDataRequest,
-  TNormalRequest,
-  TRequest,
-  TRequestResponse
-} from './base'
+import { TDataRequest, TNormalRequest, TRequest } from './base'
 import { TStateValues } from './state'
 
-export type TRequestMachineEvent<T> = {
+export type TRequestMachineEvent<R> = {
   type: 'REQUEST'
 
-  request: TRequest<T>
+  request: TRequest<R>
 }
 
-export type TRequestMachineState<T> = {
+export type TRequestMachineState<R> = {
   value: TStateValues
 
-  context: IRequestMachineContext<T>
+  context: IRequestMachineContext<R>
 }
 
-export interface IRequestMachineContext<T> {
-  data: TRequestResponse<T>
+export interface IRequestMachineContext<R> {
+  data?: R
 
-  error: AxiosError
+  error?: AxiosError
 }
 
 export interface ICreateRequests {
