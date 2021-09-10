@@ -4,6 +4,14 @@
 ### Bug Fixes
 
 * updated readme for highlight code ([10ac78c](https://github.com/andyngdz/query-machine/commit/10ac78c28aeaaf624f8b3a228c4879439753cee0))
+* updated readme for using useQueryMachine ([84832e5](https://github.com/andyngdz/query-machine/commit/84832e5274efe9565839b6011c95ce5120c695b9))
+
+## [1.2.2](https://github.com/andyngdz/query-machine/compare/v1.2.1...v1.2.2) (2021-09-10)
+
+
+### Bug Fixes
+
+* updated readme for highlight code ([10ac78c](https://github.com/andyngdz/query-machine/commit/10ac78c28aeaaf624f8b3a228c4879439753cee0))
 
 ## [1.2.1](https://github.com/andyngdz/query-machine/compare/v1.2.0...v1.2.1) (2021-09-10)
 
