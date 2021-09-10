@@ -10,4 +10,4 @@ export type TDataRequest = <P>(
   config?: AxiosRequestConfig
 ) => void
 
-export type TRequestResponse<T> = () => Promise<AxiosResponse<T>>
+export type TRequestResponse<T> = Promise<AxiosResponse<T> | AxiosResponse<T>[]>

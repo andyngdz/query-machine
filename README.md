@@ -135,9 +135,40 @@ send('REQUEST', {
 		// Do something here?
 		const  randomDogImage1  =  apiBase.get('/breeds/image/random')
 		// May do something here again?
+
 		return  randomDogImage1
 	}
 })
+
+// Your data will be here
+state.context.data
+```
+
+```
+// Your need to install axios
+import axios from 'axios'
+import { useAxiosQueryMachine } from 'query-machine'
+
+// Create a new instance
+const [{ state, send }, apiBase] = useAxiosQueryMachine({
+	baseURL: 'https://dog.ceo/api'
+})
+
+// Send custom request
+send('REQUEST', {
+	request: () => {
+		// Do something here?
+		const randomDogImage1 = apiBase.get('/breeds/image/random')
+		const randomDogImage2 = apiBase.get('/breeds/image/random')
+		const randomDogImage3 = apiBase.get('/breeds/image/random')
+		// May do something here again?
+
+		return axios.all([randomDogImage1, randomDogImage2, randomDogImage3])
+	}
+})
+
+// Data will be an array here
+state.context.data
 ```
 
 ### Additional information
@@ -153,6 +184,116 @@ export  interface  AxiosError<T  =  any> extends  Error {
 	isAxiosError:  boolean;
 	toJSON: () =>  object;
 }
+```
+
+```
+AxiosResponse
+
+{
+    "url": "/breeds/image/random",
+    "method": "get",
+    "headers": {
+        "Accept": "application/json, text/plain, */*"
+    },
+    "baseURL": "https://dog.ceo/api",
+    "transformRequest": [
+        null
+    ],
+    "transformResponse": [
+        null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "transitional": {
+        "silentJSONParsing": true,
+        "forcedJSONParsing": true,
+        "clarifyTimeoutError": false
+    }
+}
+```
+
+```
+AxiosResponse[]
+
+[
+    {
+        "data": {
+            "message": "https://images.dog.ceo/breeds/pitbull/20190801_154956.jpg",
+            "status": "success"
+        },
+        "status": 200,
+        "statusText": "",
+        "headers": {
+            "cache-control": "no-cache, private",
+            "content-type": "application/json"
+        },
+        "config": {
+            "url": "/breeds/image/random",
+            "method": "get",
+            "headers": {
+                "Accept": "application/json, text/plain, */*"
+            },
+            "baseURL": "https://dog.ceo/api",
+            "transformRequest": [
+                null
+            ],
+            "transformResponse": [
+                null
+            ],
+            "timeout": 0,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1,
+            "transitional": {
+                "silentJSONParsing": true,
+                "forcedJSONParsing": true,
+                "clarifyTimeoutError": false
+            }
+        },
+        "request": {}
+    },
+    {
+        "data": {
+            "message": "https://images.dog.ceo/breeds/retriever-golden/Z6A_4500_200808.jpg",
+            "status": "success"
+        },
+        "status": 200,
+        "statusText": "",
+        "headers": {
+            "cache-control": "no-cache, private",
+            "content-type": "application/json"
+        },
+        "config": {
+            "url": "/breeds/image/random",
+            "method": "get",
+            "headers": {
+                "Accept": "application/json, text/plain, */*"
+            },
+            "baseURL": "https://dog.ceo/api",
+            "transformRequest": [
+                null
+            ],
+            "transformResponse": [
+                null
+            ],
+            "timeout": 0,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1,
+            "transitional": {
+                "silentJSONParsing": true,
+                "forcedJSONParsing": true,
+                "clarifyTimeoutError": false
+            }
+        },
+        "request": {}
+    }
+]
 ```
 
 ### Credits

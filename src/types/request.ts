@@ -1,5 +1,10 @@
 import { AxiosError } from 'axios'
-import { TDataRequest, TNormalRequest, TRequest } from './base'
+import {
+  TDataRequest,
+  TNormalRequest,
+  TRequest,
+  TRequestResponse
+} from './base'
 import { TStateValues } from './state'
 
 export type TRequestMachineEvent<T> = {
@@ -15,7 +20,7 @@ export type TRequestMachineState<T> = {
 }
 
 export interface IRequestMachineContext<T> {
-  data: T
+  data: TRequestResponse<T>
 
   error: AxiosError
 }

@@ -1,9 +1,9 @@
-import { AxiosResponse } from 'axios'
 import { assign, createMachine, DoneInvokeEvent } from 'xstate'
 import {
   IRequestMachineContext,
   TRequestMachineEvent,
-  TRequestMachineState
+  TRequestMachineState,
+  TRequestResponse
 } from '../types'
 
 const REQUEST_MACHINE_ACTIONS = {
@@ -31,10 +31,12 @@ export const requestMachine = <T>() =>
           },
 
           onDone: {
-            actions: assign((_, event: DoneInvokeEvent<AxiosResponse<T>>) => {
-              const { data } = event.data
-              return { data }
-            }),
+            actions: assign(
+              (_, event: DoneInvokeEvent<TRequestResponse<T>>) => {
+                const { data } = event
+                return { data }
+              }
+            ),
             target: 'success'
           },
 
