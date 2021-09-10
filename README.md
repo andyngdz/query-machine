@@ -38,7 +38,7 @@ yarn install query-machine
 
 ### Quick start
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
@@ -62,13 +62,16 @@ state.context.data <- Your data here
 
 #### Checking states
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{state, onGet }] = useAxiosQueryMachine<IDogResponse>({
-  baseURL: 'https://dog.ceo/api'
-})
+const [{ state, onGet }] =
+  useAxiosQueryMachine <
+  IDogResponse >
+  {
+    baseURL: 'https://dog.ceo/api'
+  }
 
 // Request to get a random image
 onGet('/breeds/image/random')
@@ -85,25 +88,21 @@ state.matches('success')
 
 ##### Or you can check directly
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{
-	state,
-	onGet,
-	isFailure,
-	isIdle,
-	isRequest,
-	isSuccess
-}] = useAxiosQueryMachine<IDogResponse>({
-  baseURL: 'https://dog.ceo/api'
-})
+const [{ state, onGet, isFailure, isIdle, isRequest, isSuccess }] =
+  useAxiosQueryMachine <
+  IDogResponse >
+  {
+    baseURL: 'https://dog.ceo/api'
+  }
 ```
 
 #### Where are errors?
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
@@ -121,7 +120,7 @@ state.context.error <- AxiosError
 
 #### Interceptors
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
@@ -158,50 +157,50 @@ apiBase.interceptors.response.use(
 
 #### Custom request?
 
-```
+```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
-const [{ state,  send },  apiBase] =  useAxiosQueryMachine({
-	baseURL:  'https://dog.ceo/api'
+const [{ state, send }, apiBase] = useAxiosQueryMachine({
+  baseURL: 'https://dog.ceo/api'
 })
 
 // Send custom request
 send('REQUEST', {
-	request: () => {
+  request: () => {
     // Do something here?
-    const  randomDogImage1  =  apiBase.get('/breeds/image/random')
+    const randomDogImage1 = apiBase.get('/breeds/image/random')
     // May do something here again?
 
-    return  randomDogImage1
-	}
+    return randomDogImage1
+  }
 })
 
 // Your data will be here
 state.context.data
 ```
 
-```
+```javascript
 // Your need to install axios
 import axios from 'axios'
 import { useAxiosQueryMachine } from 'query-machine'
 
 // Create a new instance
 const [{ state, send }, apiBase] = useAxiosQueryMachine({
-	baseURL: 'https://dog.ceo/api'
+  baseURL: 'https://dog.ceo/api'
 })
 
 // Send custom request
 send('REQUEST', {
-	request: () => {
-		// Do something here?
-		const randomDogImage1 = apiBase.get('/breeds/image/random')
-		const randomDogImage2 = apiBase.get('/breeds/image/random')
-		const randomDogImage3 = apiBase.get('/breeds/image/random')
-		// May do something here again?
+  request: () => {
+    // Do something here?
+    const randomDogImage1 = apiBase.get('/breeds/image/random')
+    const randomDogImage2 = apiBase.get('/breeds/image/random')
+    const randomDogImage3 = apiBase.get('/breeds/image/random')
+    // May do something here again?
 
-		return axios.all([randomDogImage1, randomDogImage2, randomDogImage3])
-	}
+    return axios.all([randomDogImage1, randomDogImage2, randomDogImage3])
+  }
 })
 
 // Data will be an array here
@@ -210,20 +209,20 @@ state.context.data
 
 ### Additional information
 
-```
+```javascript
 // AxiosError
 
-export  interface  AxiosError<T  =  any> extends  Error {
-	config:  AxiosRequestConfig;
-	code?:  string;
-	request?:  any;
-	response?:  AxiosResponse<T>;
-	isAxiosError:  boolean;
-	toJSON: () =>  object;
+export interface AxiosError<T = any> extends Error {
+  config: AxiosRequestConfig;
+  code?: string;
+  request?: any;
+  response?: AxiosResponse<T>;
+  isAxiosError: boolean;
+  toJSON: () => object;
 }
 ```
 
-```
+```json
 AxiosResponse
 
 {
@@ -252,7 +251,7 @@ AxiosResponse
 }
 ```
 
-```
+```json
 AxiosResponse[]
 
 [
