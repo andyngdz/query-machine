@@ -42,10 +42,37 @@ yarn install query-machine
 ```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
-// Create a new instance
-const [{ state, onGet }] = useAxiosQueryMachine<IDogResponse>({
+// Create a new query machine
+const [{ state, onGet }, apiBase] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
+
+// Request to get a random image
+onGet('/breeds/image/random')
+
+// Check state, context
+// isRequest?
+state.matches('request')
+// Context
+state.context
+// Data
+state.context.data <- Your data here
+// AxiosIntance
+apiBase <- Can use for interceptors, other configs etc...
+```
+
+### Use your own AxiosInstance?
+```javascript
+// Your need to install axios
+import axios from 'axios'
+import { useQueryMachine } from 'query-machine'
+
+
+// Create a new axios instance
+const axiosInstance = axios.create({ baseURL: 'https://dog.ceo/api' })
+
+// Create a new query machine
+const { state, send, onGet, isRequest } = useQueryMachine<IDogResponse>(axiosInstance)
 
 // Request to get a random image
 onGet('/breeds/image/random')
@@ -66,7 +93,7 @@ state.context.data <- Your data here
 ```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
-// Create a new instance
+// Create a new query machine
 const [{ state, onGet }] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
@@ -90,7 +117,7 @@ state.matches('success')
 ```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
-// Create a new instance
+// Create a new query machine
 const [{ state, onGet, isFailure, isIdle, isRequest, isSuccess }] =
   useAxiosQueryMachine<IDogResponse>({
     baseURL: 'https://dog.ceo/api'
@@ -102,7 +129,7 @@ const [{ state, onGet, isFailure, isIdle, isRequest, isSuccess }] =
 ```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
-// Create a new instance
+// Create a new query machine
 const [{ state, onGet, isFailure }] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
@@ -123,7 +150,7 @@ state.context.error <- AxiosError
 ```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
-// Create a new instance
+// Create a new query machine
 const [{ state, onGet, onPost,.... }, apiBase] = useAxiosQueryMachine<IDogResponse>({
   baseURL: 'https://dog.ceo/api'
 })
@@ -160,7 +187,7 @@ apiBase.interceptors.response.use(
 ```javascript
 import { useAxiosQueryMachine } from 'query-machine'
 
-// Create a new instance
+// Create a new query machine
 const [{ state, send }, apiBase] = useAxiosQueryMachine({
   baseURL: 'https://dog.ceo/api'
 })
@@ -187,7 +214,7 @@ state.context.data
 import axios from 'axios'
 import { useAxiosQueryMachine } from 'query-machine'
 
-// Create a new instance
+// Create a new query machine
 const [{ state, send }, apiBase] = useAxiosQueryMachine({
   baseURL: 'https://dog.ceo/api'
 })
