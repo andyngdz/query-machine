@@ -1,12 +1,12 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { IUseQueryMachine } from '../types'
-import { useQueryMachine } from './useQueryMachine'
+import { useQueryMachineCore } from './useQueryMachineCore'
 
-export const useAxiosQueryMachine = <T>(
+export const useAxiosQueryMachine = (
   config?: AxiosRequestConfig
-): [IUseQueryMachine<AxiosResponse<T>>, AxiosInstance] => {
+): [IUseQueryMachine, AxiosInstance] => {
   const baseAxios = axios.create(config)
-  const queryMachine = useQueryMachine<T>(baseAxios)
+  const useQueryMachine = <T>() => useQueryMachineCore<T>(baseAxios)
 
-  return [queryMachine, baseAxios]
+  return [useQueryMachine, baseAxios]
 }
