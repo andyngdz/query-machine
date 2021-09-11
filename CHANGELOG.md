@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/andyngdz/query-machine/compare/v1.2.2...v1.3.0) (2021-09-11)
+
+
+### Features
+
+* added new functions ([e41ac7b](https://github.com/andyngdz/query-machine/commit/e41ac7b19f3fe7841e0e61d81f0686d0ada2139f))
+* added useQueryMachineCore. can reuse useQueryMachine ([2a4eb08](https://github.com/andyngdz/query-machine/commit/2a4eb0878eb2f486cedc882d98636c732173b8c0))
+
 ## [1.2.2](https://github.com/andyngdz/query-machine/compare/v1.2.1...v1.2.2) (2021-09-10)
 
 
