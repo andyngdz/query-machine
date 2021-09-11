@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { IUseQueryMachine } from '../types'
 import { useQueryMachineCore } from './useQueryMachineCore'
 
-export const useAxiosQueryMachine = (
+export const useCreateAxiosQueryMachine = (
   config?: AxiosRequestConfig
 ): [IUseQueryMachine, AxiosInstance] => {
   const baseAxios = axios.create(config)

@@ -28,9 +28,11 @@ export interface IUseQueryMachineCore<T> extends ICreateRequests {
 
   isSuccess: boolean
 
-  state: TState<T>
-
   send: TSend<T>
 }
 
-export type IUseQueryMachine = <T>() => IUseQueryMachineCore<AxiosResponse<T>>
+export type IUseQueryMachineCoreReturn<R> = [TState<R>, IUseQueryMachineCore<R>]
+
+export type IUseQueryMachine = <T>() => IUseQueryMachineCoreReturn<
+  AxiosResponse<T>
+>
