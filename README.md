@@ -37,123 +37,123 @@ Using yarn:
 yarn install query-machine
 ```
 
-### Quick start
+## Quick start
 
+
+### Create a new machine
 ```javascript
-import { useAxiosQueryMachine } from 'query-machine'
+// hooks/useQueryMachine.ts
 
-// Create a new query machine
-const [{ state, onGet }, apiBase] = useAxiosQueryMachine<IDogResponse>({
-  baseURL: 'https://dog.ceo/api'
-})
+import { useCreateAxiosQueryMachine } from 'query-machine'
 
-// Request to get a random image
-onGet('/breeds/image/random')
+export const useQueryMachine = () => {
+  const axiosQueryMachine = useCreateAxiosQueryMachine({
+    baseURL: 'https://dog.ceo/api'
+  })
 
-// Check state, context
-// isRequest?
-state.matches('request')
-// Context
-state.context
-// Data
-state.context.data <- Your data here
-// AxiosIntance
-apiBase <- Can use for interceptors, other configs etc...
+  // axiosQueryMachine
+  // [IUseQueryMachine, AxiosInstance]
+
+  return axiosQueryMachine
+}
 ```
 
-### Use your own AxiosInstance?
+#### Use your own AxiosInstance?
 ```javascript
-// Your need to install axios
-import axios from 'axios'
-import { useQueryMachine } from 'query-machine'
+// hooks/useQueryMachine.ts
 
+// You need to install axios
+import axios from "axios"
+import { useCreateQueryMachine } from 'query-machine'
 
 // Create a new axios instance
-const axiosInstance = axios.create({ baseURL: 'https://dog.ceo/api' })
+// Use this instance to config interceptors, etc...
+export const apiBase = axios.create({ baseURL: 'https://dog.ceo/api' })
 
-// Create a new query machine
-const { state, send, onGet, isRequest } = useQueryMachine<IDogResponse>(axiosInstance)
+export const useQueryMachine = () => {
+  const queryMachine = useCreateQueryMachine(apiBase)
 
-// Request to get a random image
-onGet('/breeds/image/random')
-
-// Check state, context
-// isRequest?
-state.matches('request')
-// Context
-state.context
-// Data
-state.context.data <- Your data here
+  return queryMachine
+}
 ```
 
 ### Example
 
+```javascript
+import { useQueryMachine } from 'hooks/useQueryMachine'
+
+export const Home = () => {
+  const [queryMachine] = useQueryMachine()
+  const [dogState, { onGet }] = queryMachine<IDogResponse>()
+
+  onGet('/breeds/image/random')
+
+  // Check state, context
+  // isRequest?
+  dogState.matches('request')
+  // Context
+  dogState.context
+  // Data
+  dogState.context.data <- Your data here
+  return ....
+}
+```
+
 #### Checking states
 
 ```javascript
-import { useAxiosQueryMachine } from 'query-machine'
+import { useQueryMachine } from 'hooks/useQueryMachine'
 
-// Create a new query machine
-const [{ state, onGet }] = useAxiosQueryMachine<IDogResponse>({
-  baseURL: 'https://dog.ceo/api'
-})
+const [queryMachine] = useQueryMachine()
+const [dogState, { onGet }] = queryMachine<IDogResponse>()
 
 // Request to get a random image
 onGet('/breeds/image/random')
 
 
 // isFailure?
-state.matches('failure')
+dogState.matches('failure')
 // isIdle?
-state.matches('idle')
+dogState.matches('idle')
 // isRequest?
-state.matches('request')
+dogState.matches('request')
 // isSuccess?
-state.matches('success')
+dogState.matches('success')
 ```
 
 ##### Or you can check directly
 
 ```javascript
-import { useAxiosQueryMachine } from 'query-machine'
+import { useQueryMachine } from 'hooks/useQueryMachine'
 
-// Create a new query machine
-const [{ state, onGet, isFailure, isIdle, isRequest, isSuccess }] =
-  useAxiosQueryMachine<IDogResponse>({
-    baseURL: 'https://dog.ceo/api'
-  })
+const [queryMachine] = useQueryMachine()
+const [dogState, { isFailure, isIdle, isRequest, isSuccess }] =
+  queryMachine<IDogResponse>()
 ```
 
 #### Where are errors?
 
 ```javascript
-import { useAxiosQueryMachine } from 'query-machine'
+import { useQueryMachine } from 'hooks/useQueryMachine'
 
-// Create a new query machine
-const [{ state, onGet, isFailure }] = useAxiosQueryMachine<IDogResponse>({
-  baseURL: 'https://dog.ceo/api'
-})
+const [queryMachine] = useQueryMachine()
+const [dogState, { onGet, isFailure }] =  queryMachine<IDogResponse>()
 
 // Request to get a random image, but the dog runs away?
 onGet('/breeds/image/random')
 
 // Check status here
-state.matches('failure') <- First way to check failure
+dogState.matches('failure') <- First way to check failure
 isFailure <- Second way to check failure
 
 // Get errors here
-state.context.error <- AxiosError
+dogState.context.error <- AxiosError
 ```
 
 #### Interceptors
 
 ```javascript
-import { useAxiosQueryMachine } from 'query-machine'
-
-// Create a new query machine
-const [{ state, onGet, onPost,.... }, apiBase] = useAxiosQueryMachine<IDogResponse>({
-  baseURL: 'https://dog.ceo/api'
-})
+// apiBase from hooks
 
 // Add a request interceptor
 apiBase.interceptors.request.use(
@@ -185,12 +185,10 @@ apiBase.interceptors.response.use(
 #### Custom request?
 
 ```javascript
-import { useAxiosQueryMachine } from 'query-machine'
+import { useQueryMachine } from 'hooks/useQueryMachine'
 
-// Create a new query machine
-const [{ state, send }, apiBase] = useAxiosQueryMachine({
-  baseURL: 'https://dog.ceo/api'
-})
+const [queryMachine, apiBase] = useQueryMachine()
+const [dogState, { send }] = queryMachine<IDogResponse>()
 
 // Send custom request
 send('REQUEST', {
@@ -204,7 +202,7 @@ send('REQUEST', {
 })
 
 // Your data will be here
-state.context.data
+dogState.context.data
 ```
 
 ##### Multi requests
@@ -212,12 +210,10 @@ state.context.data
 ```javascript
 // Your need to install axios
 import axios from 'axios'
-import { useAxiosQueryMachine } from 'query-machine'
+import { useQueryMachine } from 'hooks/useQueryMachine'
 
-// Create a new query machine
-const [{ state, send }, apiBase] = useAxiosQueryMachine({
-  baseURL: 'https://dog.ceo/api'
-})
+const [queryMachine, apiBase] = useQueryMachine()
+const [dogState, { send }] = queryMachine<IDogResponse>()
 
 // Send custom request
 send('REQUEST', {
@@ -233,7 +229,7 @@ send('REQUEST', {
 })
 
 // Data will be an array here
-state.context.data
+dogState.context.data
 ```
 
 ### Additional information

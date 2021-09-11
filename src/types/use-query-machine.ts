@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios'
 import { Interpreter, State } from 'xstate'
 import {
   ICreateRequests,
@@ -18,7 +19,7 @@ export type TState<T> = State<
   TRequestMachineState<T>
 >
 
-export interface IUseQueryMachine<T> extends ICreateRequests {
+export interface IUseQueryMachineCore<T> extends ICreateRequests {
   isFailure: boolean
 
   isIdle: boolean
@@ -27,7 +28,11 @@ export interface IUseQueryMachine<T> extends ICreateRequests {
 
   isSuccess: boolean
 
-  state: TState<T>
-
   send: TSend<T>
 }
+
+export type IUseQueryMachineCoreReturn<R> = [TState<R>, IUseQueryMachineCore<R>]
+
+export type IUseQueryMachine = <T>() => IUseQueryMachineCoreReturn<
+  AxiosResponse<T>
+>
