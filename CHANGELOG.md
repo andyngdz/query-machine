@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/andyngdz/query-machine/compare/v1.3.0...v1.4.0) (2021-09-16)
+
+
+### Features
+
+* exported types ([743cca9](https://github.com/andyngdz/query-machine/commit/743cca9047550280ea3d788df195ab5852e92b32))
+
 # [1.3.0](https://github.com/andyngdz/query-machine/compare/v1.2.2...v1.3.0) (2021-09-11)
 
 
