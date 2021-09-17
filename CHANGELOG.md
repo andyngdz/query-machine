@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/andyngdz/query-machine/compare/v1.4.0...v1.5.0) (2021-09-17)
+
+
+### Features
+
+* added machine loader ([c6265a2](https://github.com/andyngdz/query-machine/commit/c6265a26cdf62959c6caab191eb06696ce647932))
+
 # [1.4.0](https://github.com/andyngdz/query-machine/compare/v1.3.0...v1.4.0) (2021-09-16)
 
 

@@ -1,1 +1,1 @@
-export * from './machine-loader/MachineLoader'
+export * from './machine-loader/MachineLoader';
