@@ -232,6 +232,33 @@ send('REQUEST', {
 dogState.context.data
 ```
 
+### Loader
+```javascript
+import { MachineLoader } from 'query-machine'
+import { useQueryMachine } from 'hooks/useQueryMachine'
+import { useEffectOnce } from 'react-use'
+
+export const Home = () => {
+  const [queryMachine] = useQueryMachine()
+  const [dogState, { onGet }] = queryMachine<IDogResponse>()
+
+  useEffectOnce(() => {
+    onGet('/breeds/image/random')
+  })
+
+  return (
+    <MachineLoader
+      state={dogState}
+      onLoading={() => // Your custom loading component, or you don't need to use this}
+      onBuilder={data => {
+        const { message } = data
+        return <div>{message}</div>
+      }}
+    />
+  )
+}
+```
+
 ### Additional information
 
 ```javascript
