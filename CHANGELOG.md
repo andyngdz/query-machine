@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/andyngdz/query-machine/compare/v1.5.0...v1.5.1) (2021-10-07)
+
+
+### Bug Fixes
+
+* error is empty ([d6d465d](https://github.com/andyngdz/query-machine/commit/d6d465db738b25bc3bacf16d0768401975af9b19))
+
 # [1.5.0](https://github.com/andyngdz/query-machine/compare/v1.4.0...v1.5.0) (2021-09-17)
 
 
