@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import { assign, createMachine, DoneInvokeEvent } from 'xstate'
 import {
   IRequestMachineContext,
@@ -38,8 +39,8 @@ export const requestMachine = <R>() =>
           },
 
           onError: {
-            actions: assign((_, event) => {
-              const { data: error } = event.data
+            actions: assign((_, event: DoneInvokeEvent<AxiosError>) => {
+              const { data: error } = event
               return { error }
             }),
             target: 'failure'
